@@ -1,0 +1,267 @@
+<html>
+<head>
+<title>GestionStagesApp.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+GestionStagesApp.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.</span><span class="s1">table</span><span class="s2">.</span><span class="s1">DefaultTableModel</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">controle</span><span class="s2">.</span><span class="s1">Personne</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">controle</span><span class="s2">.</span><span class="s1">Stagiaire</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">controle</span><span class="s2">.</span><span class="s1">Stage</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">controle</span><span class="s2">.</span><span class="s1">DataManager</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.*;</span>
+
+<span class="s0">public class </span><span class="s1">GestionStagesApp </span><span class="s2">{</span>
+
+    <span class="s0">public </span><span class="s1">GestionStagesApp</span><span class="s2">() {</span>
+        <span class="s1">creerPageAccueil</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">creerPageAccueil</span><span class="s2">() {</span>
+        <span class="s1">JFrame accueilFrame </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JFrame</span><span class="s2">(</span><span class="s3">&quot;Bienvenue&quot;</span><span class="s2">);</span>
+        <span class="s1">accueilFrame</span><span class="s2">.</span><span class="s1">setDefaultCloseOperation</span><span class="s2">(</span><span class="s1">JFrame</span><span class="s2">.</span><span class="s1">EXIT_ON_CLOSE</span><span class="s2">);</span>
+        <span class="s1">accueilFrame</span><span class="s2">.</span><span class="s1">setSize</span><span class="s2">(</span><span class="s4">600</span><span class="s2">, </span><span class="s4">400</span><span class="s2">);</span>
+        <span class="s1">accueilFrame</span><span class="s2">.</span><span class="s1">setLocationRelativeTo</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+
+        <span class="s1">JPanel accueilPanel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">();</span>
+        <span class="s1">accueilPanel</span><span class="s2">.</span><span class="s1">setBackground</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Color</span><span class="s2">(</span><span class="s4">255</span><span class="s2">, </span><span class="s4">182</span><span class="s2">, </span><span class="s4">193</span><span class="s2">)); </span><span class="s5">// Fond rose clair</span>
+
+
+        <span class="s1">JLabel bienvenueLabel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JLabel</span><span class="s2">(</span><span class="s3">&quot;Bonjour, bienvenue !&quot;</span><span class="s2">);</span>
+        <span class="s1">bienvenueLabel</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Font</span><span class="s2">(</span><span class="s3">&quot;Arial&quot;</span><span class="s2">, </span><span class="s1">Font</span><span class="s2">.</span><span class="s1">BOLD</span><span class="s2">, </span><span class="s4">24</span><span class="s2">));</span>
+        <span class="s1">bienvenueLabel</span><span class="s2">.</span><span class="s1">setForeground</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Color</span><span class="s2">(</span><span class="s4">255</span><span class="s2">, </span><span class="s4">20</span><span class="s2">, </span><span class="s4">147</span><span class="s2">)); </span><span class="s5">// Rose foncé</span>
+        <span class="s1">bienvenueLabel</span><span class="s2">.</span><span class="s1">setHorizontalAlignment</span><span class="s2">(</span><span class="s1">SwingConstants</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+
+
+        <span class="s1">accueilPanel</span><span class="s2">.</span><span class="s1">setLayout</span><span class="s2">(</span><span class="s0">new </span><span class="s1">BorderLayout</span><span class="s2">());</span>
+        <span class="s1">accueilPanel</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">bienvenueLabel</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+
+
+        <span class="s1">Timer timer </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Timer</span><span class="s2">(</span><span class="s4">3000</span><span class="s2">, </span><span class="s0">new </span><span class="s1">ActionListener</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed</span><span class="s2">(</span><span class="s1">ActionEvent e</span><span class="s2">) {</span>
+
+                <span class="s1">accueilFrame</span><span class="s2">.</span><span class="s1">dispose</span><span class="s2">();</span>
+                <span class="s1">creerInterface</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s1">timer</span><span class="s2">.</span><span class="s1">setRepeats</span><span class="s2">(</span><span class="s0">false</span><span class="s2">); </span><span class="s5">//</span>
+        <span class="s1">timer</span><span class="s2">.</span><span class="s1">start</span><span class="s2">();</span>
+
+        <span class="s1">accueilFrame</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">accueilPanel</span><span class="s2">);</span>
+        <span class="s1">accueilFrame</span><span class="s2">.</span><span class="s1">setVisible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">creerInterface</span><span class="s2">() {</span>
+
+        <span class="s1">JFrame frame </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JFrame</span><span class="s2">(</span><span class="s3">&quot;Gestion Simplifiée des Stages&quot;</span><span class="s2">);</span>
+        <span class="s1">frame</span><span class="s2">.</span><span class="s1">setDefaultCloseOperation</span><span class="s2">(</span><span class="s1">JFrame</span><span class="s2">.</span><span class="s1">EXIT_ON_CLOSE</span><span class="s2">);</span>
+        <span class="s1">frame</span><span class="s2">.</span><span class="s1">setSize</span><span class="s2">(</span><span class="s4">900</span><span class="s2">, </span><span class="s4">600</span><span class="s2">);</span>
+        <span class="s1">frame</span><span class="s2">.</span><span class="s1">setLocationRelativeTo</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+
+
+        <span class="s1">JPanel panelPrincipal </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">(</span><span class="s0">new </span><span class="s1">BorderLayout</span><span class="s2">());</span>
+        <span class="s1">panelPrincipal</span><span class="s2">.</span><span class="s1">setBackground</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Color</span><span class="s2">(</span><span class="s4">255</span><span class="s2">, </span><span class="s4">182</span><span class="s2">, </span><span class="s4">193</span><span class="s2">)); </span><span class="s5">// Fond rose pâle</span>
+
+        <span class="s1">JTabbedPane tabbedPane </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTabbedPane</span><span class="s2">();</span>
+
+
+        <span class="s1">JPanel panelStagiaires </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">(</span><span class="s0">new </span><span class="s1">BorderLayout</span><span class="s2">());</span>
+        <span class="s1">panelStagiaires</span><span class="s2">.</span><span class="s1">setBackground</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Color</span><span class="s2">(</span><span class="s4">255</span><span class="s2">, </span><span class="s4">182</span><span class="s2">, </span><span class="s4">193</span><span class="s2">)); </span><span class="s5">// Fond rose pâle pour l'onglet</span>
+
+        <span class="s1">DefaultTableModel stagiaireModel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">DefaultTableModel</span><span class="s2">(</span><span class="s0">new </span><span class="s1">String</span><span class="s2">[]{</span><span class="s3">&quot;Nom&quot;</span><span class="s2">, </span><span class="s3">&quot;Prénom&quot;</span><span class="s2">, </span><span class="s3">&quot;Niveau&quot;</span><span class="s2">}, </span><span class="s4">0</span><span class="s2">);</span>
+        <span class="s1">JTable tableStagiaires </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTable</span><span class="s2">(</span><span class="s1">stagiaireModel</span><span class="s2">);</span>
+        <span class="s1">JScrollPane scrollPaneStagiaires </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JScrollPane</span><span class="s2">(</span><span class="s1">tableStagiaires</span><span class="s2">);</span>
+        <span class="s1">panelStagiaires</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">scrollPaneStagiaires</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+
+        <span class="s1">JButton btnAjouterStagiaire </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s3">&quot;Ajouter Stagiaire&quot;</span><span class="s2">);</span>
+        <span class="s1">JButton btnSupprimerStagiaire </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s3">&quot;Supprimer Stagiaire&quot;</span><span class="s2">);</span>
+        <span class="s1">JButton btnAfficherStagiaires </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s3">&quot;Afficher Stagiaires&quot;</span><span class="s2">);</span>
+
+
+        <span class="s1">styleButton</span><span class="s2">(</span><span class="s1">btnAjouterStagiaire</span><span class="s2">);</span>
+        <span class="s1">styleButton</span><span class="s2">(</span><span class="s1">btnSupprimerStagiaire</span><span class="s2">);</span>
+        <span class="s1">styleButton</span><span class="s2">(</span><span class="s1">btnAfficherStagiaires</span><span class="s2">);</span>
+
+        <span class="s1">JPanel boutonsStagiaires </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">();</span>
+        <span class="s1">boutonsStagiaires</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">btnAjouterStagiaire</span><span class="s2">);</span>
+        <span class="s1">boutonsStagiaires</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">btnSupprimerStagiaire</span><span class="s2">);</span>
+        <span class="s1">boutonsStagiaires</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">btnAfficherStagiaires</span><span class="s2">);</span>
+
+        <span class="s1">panelStagiaires</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">boutonsStagiaires</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">SOUTH</span><span class="s2">);</span>
+        <span class="s1">tabbedPane</span><span class="s2">.</span><span class="s1">addTab</span><span class="s2">(</span><span class="s3">&quot;Stagiaires&quot;</span><span class="s2">, </span><span class="s1">panelStagiaires</span><span class="s2">);</span>
+
+
+        <span class="s1">JPanel panelStages </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">(</span><span class="s0">new </span><span class="s1">BorderLayout</span><span class="s2">());</span>
+        <span class="s1">panelStages</span><span class="s2">.</span><span class="s1">setBackground</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Color</span><span class="s2">(</span><span class="s4">255</span><span class="s2">, </span><span class="s4">182</span><span class="s2">, </span><span class="s4">193</span><span class="s2">)); </span><span class="s5">// Fond rose pâle pour l'onglet</span>
+
+        <span class="s1">DefaultTableModel stageModel </span><span class="s2">= </span><span class="s0">new </span><span class="s1">DefaultTableModel</span><span class="s2">(</span><span class="s0">new </span><span class="s1">String</span><span class="s2">[]{</span><span class="s3">&quot;Titre&quot;</span><span class="s2">, </span><span class="s3">&quot;Durée&quot;</span><span class="s2">, </span><span class="s3">&quot;Stagiaires&quot;</span><span class="s2">}, </span><span class="s4">0</span><span class="s2">);</span>
+        <span class="s1">JTable tableStages </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTable</span><span class="s2">(</span><span class="s1">stageModel</span><span class="s2">);</span>
+        <span class="s1">JScrollPane scrollPaneStages </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JScrollPane</span><span class="s2">(</span><span class="s1">tableStages</span><span class="s2">);</span>
+        <span class="s1">panelStages</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">scrollPaneStages</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+
+        <span class="s1">JButton btnAjouterStage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s3">&quot;Ajouter Stage&quot;</span><span class="s2">);</span>
+        <span class="s1">JButton btnAssocierStagiaire </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JButton</span><span class="s2">(</span><span class="s3">&quot;Associer Stagiaire&quot;</span><span class="s2">);</span>
+
+
+        <span class="s1">styleButton</span><span class="s2">(</span><span class="s1">btnAjouterStage</span><span class="s2">);</span>
+        <span class="s1">styleButton</span><span class="s2">(</span><span class="s1">btnAssocierStagiaire</span><span class="s2">);</span>
+
+        <span class="s1">JPanel boutonsStages </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JPanel</span><span class="s2">();</span>
+        <span class="s1">boutonsStages</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">btnAjouterStage</span><span class="s2">);</span>
+        <span class="s1">boutonsStages</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">btnAssocierStagiaire</span><span class="s2">);</span>
+
+        <span class="s1">panelStages</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">boutonsStages</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">SOUTH</span><span class="s2">);</span>
+        <span class="s1">tabbedPane</span><span class="s2">.</span><span class="s1">addTab</span><span class="s2">(</span><span class="s3">&quot;Stages&quot;</span><span class="s2">, </span><span class="s1">panelStages</span><span class="s2">);</span>
+
+
+        <span class="s1">panelPrincipal</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">tabbedPane</span><span class="s2">, </span><span class="s1">BorderLayout</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+        <span class="s1">frame</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">panelPrincipal</span><span class="s2">);</span>
+        <span class="s1">frame</span><span class="s2">.</span><span class="s1">setVisible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+
+
+        <span class="s1">btnAjouterStagiaire</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s1">e -&gt; ajouterStagiaire</span><span class="s2">(</span><span class="s1">stagiaireModel</span><span class="s2">));</span>
+        <span class="s1">btnAjouterStage</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s1">e -&gt; ajouterStage</span><span class="s2">(</span><span class="s1">stageModel</span><span class="s2">));</span>
+        <span class="s1">btnSupprimerStagiaire</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s1">e -&gt; supprimerStagiaire</span><span class="s2">(</span><span class="s1">stagiaireModel</span><span class="s2">));</span>
+        <span class="s1">btnAssocierStagiaire</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s1">e -&gt; associerStagiaireAStage</span><span class="s2">());</span>
+        <span class="s1">btnAfficherStagiaires</span><span class="s2">.</span><span class="s1">addActionListener</span><span class="s2">(</span><span class="s1">e -&gt; afficherStagiaires</span><span class="s2">(</span><span class="s1">stagiaireModel</span><span class="s2">));</span>
+    <span class="s2">}</span>
+
+
+    <span class="s0">private void </span><span class="s1">styleButton</span><span class="s2">(</span><span class="s1">JButton button</span><span class="s2">) {</span>
+        <span class="s1">button</span><span class="s2">.</span><span class="s1">setBackground</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Color</span><span class="s2">(</span><span class="s4">255</span><span class="s2">, </span><span class="s4">105</span><span class="s2">, </span><span class="s4">180</span><span class="s2">)); </span><span class="s5">// Rose clair</span>
+        <span class="s1">button</span><span class="s2">.</span><span class="s1">setOpaque</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s1">button</span><span class="s2">.</span><span class="s1">setBorderPainted</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s1">button</span><span class="s2">.</span><span class="s1">setFont</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Font</span><span class="s2">(</span><span class="s3">&quot;Arial&quot;</span><span class="s2">, </span><span class="s1">Font</span><span class="s2">.</span><span class="s1">BOLD</span><span class="s2">, </span><span class="s4">14</span><span class="s2">));</span>
+        <span class="s1">button</span><span class="s2">.</span><span class="s1">setForeground</span><span class="s2">(</span><span class="s1">Color</span><span class="s2">.</span><span class="s1">WHITE</span><span class="s2">);</span>
+        <span class="s1">button</span><span class="s2">.</span><span class="s1">setPreferredSize</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Dimension</span><span class="s2">(</span><span class="s4">150</span><span class="s2">, </span><span class="s4">40</span><span class="s2">));</span>
+
+        <span class="s5">// Animation du bouton</span>
+        <span class="s1">button</span><span class="s2">.</span><span class="s1">addMouseListener</span><span class="s2">(</span><span class="s0">new </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">MouseAdapter</span><span class="s2">() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">mouseEntered</span><span class="s2">(</span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">MouseEvent evt</span><span class="s2">) {</span>
+                <span class="s1">button</span><span class="s2">.</span><span class="s1">setBackground</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Color</span><span class="s2">(</span><span class="s4">255</span><span class="s2">, </span><span class="s4">20</span><span class="s2">, </span><span class="s4">147</span><span class="s2">)); </span><span class="s5">// Changement de couleur au survol</span>
+            <span class="s2">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">mouseExited</span><span class="s2">(</span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">MouseEvent evt</span><span class="s2">) {</span>
+                <span class="s1">button</span><span class="s2">.</span><span class="s1">setBackground</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Color</span><span class="s2">(</span><span class="s4">255</span><span class="s2">, </span><span class="s4">105</span><span class="s2">, </span><span class="s4">180</span><span class="s2">)); </span><span class="s5">// Retour à la couleur initiale</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">ajouterStagiaire</span><span class="s2">(</span><span class="s1">DefaultTableModel model</span><span class="s2">) {</span>
+        <span class="s1">JTextField nomField </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextField</span><span class="s2">();</span>
+        <span class="s1">JTextField prenomField </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextField</span><span class="s2">();</span>
+        <span class="s1">JTextField niveauField </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextField</span><span class="s2">();</span>
+
+        <span class="s1">Object</span><span class="s2">[] </span><span class="s1">message </span><span class="s2">= {</span>
+                <span class="s3">&quot;Nom:&quot;</span><span class="s2">, </span><span class="s1">nomField</span><span class="s2">,</span>
+                <span class="s3">&quot;Prénom:&quot;</span><span class="s2">, </span><span class="s1">prenomField</span><span class="s2">,</span>
+                <span class="s3">&quot;Niveau d'étude:&quot;</span><span class="s2">, </span><span class="s1">niveauField</span>
+        <span class="s2">};</span>
+
+        <span class="s0">int </span><span class="s1">option </span><span class="s2">= </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showConfirmDialog</span><span class="s2">(</span><span class="s0">null</span><span class="s2">, </span><span class="s1">message</span><span class="s2">, </span><span class="s3">&quot;Ajouter un Stagiaire&quot;</span><span class="s2">, </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">OK_CANCEL_OPTION</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">option </span><span class="s2">== </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">OK_OPTION</span><span class="s2">) {</span>
+            <span class="s1">String nom </span><span class="s2">= </span><span class="s1">nomField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+            <span class="s1">String prenom </span><span class="s2">= </span><span class="s1">prenomField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+            <span class="s1">String niveau </span><span class="s2">= </span><span class="s1">niveauField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">nom</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">() || </span><span class="s1">prenom</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">() || </span><span class="s1">niveau</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+                <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s0">null</span><span class="s2">, </span><span class="s3">&quot;Veuillez remplir tous les champs !&quot;</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">Stagiaire stagiaire </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Stagiaire</span><span class="s2">(</span><span class="s1">nom</span><span class="s2">, </span><span class="s1">prenom</span><span class="s2">, </span><span class="s1">niveau</span><span class="s2">);</span>
+                <span class="s1">DataManager</span><span class="s2">.</span><span class="s1">ajouterStagiaire</span><span class="s2">(</span><span class="s1">stagiaire</span><span class="s2">);</span>
+                <span class="s1">model</span><span class="s2">.</span><span class="s1">addRow</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Object</span><span class="s2">[]{</span><span class="s1">nom</span><span class="s2">, </span><span class="s1">prenom</span><span class="s2">, </span><span class="s1">niveau</span><span class="s2">});</span>
+                <span class="s1">DataManager</span><span class="s2">.</span><span class="s1">sauvegarderStagiaires</span><span class="s2">(</span><span class="s1">DataManager</span><span class="s2">.</span><span class="s1">stagiaires</span><span class="s2">);  </span><span class="s5">// Sauvegarder après ajout</span>
+                <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s0">null</span><span class="s2">, </span><span class="s3">&quot;Stagiaire ajouté avec succès !&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">ajouterStage</span><span class="s2">(</span><span class="s1">DefaultTableModel model</span><span class="s2">) {</span>
+        <span class="s1">JTextField titreField </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextField</span><span class="s2">();</span>
+        <span class="s1">JTextField dureeField </span><span class="s2">= </span><span class="s0">new </span><span class="s1">JTextField</span><span class="s2">();</span>
+
+        <span class="s1">Object</span><span class="s2">[] </span><span class="s1">message </span><span class="s2">= {</span>
+                <span class="s3">&quot;Titre:&quot;</span><span class="s2">, </span><span class="s1">titreField</span><span class="s2">,</span>
+                <span class="s3">&quot;Durée (en jours):&quot;</span><span class="s2">, </span><span class="s1">dureeField</span>
+        <span class="s2">};</span>
+
+        <span class="s0">int </span><span class="s1">option </span><span class="s2">= </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showConfirmDialog</span><span class="s2">(</span><span class="s0">null</span><span class="s2">, </span><span class="s1">message</span><span class="s2">, </span><span class="s3">&quot;Ajouter un Stage&quot;</span><span class="s2">, </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">OK_CANCEL_OPTION</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">option </span><span class="s2">== </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">OK_OPTION</span><span class="s2">) {</span>
+            <span class="s1">String titre </span><span class="s2">= </span><span class="s1">titreField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+            <span class="s1">String dureeStr </span><span class="s2">= </span><span class="s1">dureeField</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s0">int </span><span class="s1">duree </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">dureeStr</span><span class="s2">);</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">titre</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">() || </span><span class="s1">duree </span><span class="s2">&lt;= </span><span class="s4">0</span><span class="s2">) {</span>
+                    <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s0">null</span><span class="s2">, </span><span class="s3">&quot;Veuillez entrer des données valides !&quot;</span><span class="s2">);</span>
+                <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                    <span class="s1">Stage stage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Stage</span><span class="s2">(</span><span class="s1">titre</span><span class="s2">, </span><span class="s1">duree</span><span class="s2">);</span>
+                    <span class="s1">DataManager</span><span class="s2">.</span><span class="s1">ajouterStage</span><span class="s2">(</span><span class="s1">stage</span><span class="s2">);</span>
+                    <span class="s1">model</span><span class="s2">.</span><span class="s1">addRow</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Object</span><span class="s2">[]{</span><span class="s1">titre</span><span class="s2">, </span><span class="s1">duree</span><span class="s2">, </span><span class="s3">&quot;&quot;</span><span class="s2">});</span>
+                    <span class="s1">DataManager</span><span class="s2">.</span><span class="s1">sauvegarderStages</span><span class="s2">(</span><span class="s1">DataManager</span><span class="s2">.</span><span class="s1">stages</span><span class="s2">);</span>
+                    <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s0">null</span><span class="s2">, </span><span class="s3">&quot;Stage ajouté avec succès !&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">NumberFormatException ex</span><span class="s2">) {</span>
+                <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s0">null</span><span class="s2">, </span><span class="s3">&quot;Durée invalide !&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">associerStagiaireAStage</span><span class="s2">() {</span>
+        <span class="s5">// Code d'association de stagiaire à un stage</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">supprimerStagiaire</span><span class="s2">(</span><span class="s1">DefaultTableModel model</span><span class="s2">) {</span>
+        <span class="s1">String nom </span><span class="s2">= </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showInputDialog</span><span class="s2">(</span><span class="s3">&quot;Entrez le nom du stagiaire à supprimer :&quot;</span><span class="s2">);</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">nom </span><span class="s2">!= </span><span class="s0">null </span><span class="s2">&amp;&amp; !</span><span class="s1">nom</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s1">DataManager</span><span class="s2">.</span><span class="s1">supprimerStagiaire</span><span class="s2">(</span><span class="s1">nom</span><span class="s2">);</span>
+            <span class="s1">model</span><span class="s2">.</span><span class="s1">setRowCount</span><span class="s2">(</span><span class="s4">0</span><span class="s2">);  </span><span class="s5">// Réinitialise la table</span>
+            <span class="s1">afficherStagiaires</span><span class="s2">(</span><span class="s1">model</span><span class="s2">);  </span><span class="s5">// Affiche les stagiaires restants</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s0">null</span><span class="s2">, </span><span class="s3">&quot;Nom invalide.&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">afficherStagiaires</span><span class="s2">(</span><span class="s1">DefaultTableModel model</span><span class="s2">) {</span>
+        <span class="s1">model</span><span class="s2">.</span><span class="s1">setRowCount</span><span class="s2">(</span><span class="s4">0</span><span class="s2">);  </span><span class="s5">// Réinitialise la table</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">String details </span><span class="s2">: </span><span class="s1">DataManager</span><span class="s2">.</span><span class="s1">afficherStagiaires</span><span class="s2">()) {</span>
+            <span class="s1">String</span><span class="s2">[] </span><span class="s1">parts </span><span class="s2">= </span><span class="s1">details</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot;,&quot;</span><span class="s2">);</span>
+            <span class="s1">model</span><span class="s2">.</span><span class="s1">addRow</span><span class="s2">(</span><span class="s1">parts</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s1">SwingUtilities</span><span class="s2">.</span><span class="s1">invokeLater</span><span class="s2">(</span><span class="s1">GestionStagesApp::</span><span class="s0">new</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+
+
+
+
+
+</pre>
+</body>
+</html>
